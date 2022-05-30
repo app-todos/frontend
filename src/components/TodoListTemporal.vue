@@ -17,12 +17,21 @@
     v-for="todo of todoList"
     v-bind:key="todo.id"
   >
-    <span>{{ todo }}</span>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h2>{{ todo.title }}</h2>
+        <p title="todo.description">{{ todo.description.slice( 50 ) || '-' }}</p>
+      </div>
+      <div>
+        <span>{{ new Date( todo.created_at ).toLocaleString( 'ru' ) }}</span>
+      </div>
+    </div>
+    <hr/>
   </div>
 </template>
 
 <script>
-  import { onMounted,  ref } from 'vue'
+  import { onMounted,  ref, computed } from 'vue'
   import { useRouter } from 'vue-router'
 
   import { auth } from '@/store'
@@ -55,8 +64,10 @@
         const todo = response.data
         todoList.value.unshift( todo )
       }
+
+      const sortedTodoList = computed( () => todoList.value.sort( ( a, b ) => new Date( b.created_at ) - new Date( a.created_at ) ) )
       
-      return { todoList, title, description, submit }
+      return { todoList: sortedTodoList, title, description, submit }
     }
   }
 </script>
