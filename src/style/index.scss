@@ -12,6 +12,10 @@ ul {
   list-style: none;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 *, *:before, *:after {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -94,6 +98,10 @@ ul {
   }
 }
 
+.resize-vertical {
+  resize: vertical;
+}
+
 .container {
   width: 1600px;
   max-width: 100%;
@@ -119,4 +127,8 @@ ul {
   &-lavender {
     background-color: lavender;
   }
+}
+
+.textarea {
+  min-height: 46px;
 }
